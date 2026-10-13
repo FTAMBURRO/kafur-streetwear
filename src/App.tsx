@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { LanguageContext, messages, useLanguage, type Language } from "./i18n";
+import Drop001Cinematic from "./components/drop001/Drop001Cinematic";
 
 type Page = "home" | "shop" | "product" | "collections" | "about" | "cart";
 type CartItem = { id: number; size: string; quantity: number };
 
 const photos = {
-  hero: "https://images.unsplash.com/photo-1626537848205-6854020ebe5a?auto=format&fit=crop&w=2000&q=88",
   campaign: "https://images.unsplash.com/photo-1635650804060-bb009bcb2ea5?auto=format&fit=crop&w=1600&q=88",
   about: "https://images.unsplash.com/photo-1705944910791-887c4ed535c8?auto=format&fit=crop&w=1400&q=88",
   editorial: "https://images.unsplash.com/photo-1635650804483-2a77a8c9e728?auto=format&fit=crop&w=1400&q=88",
@@ -201,20 +201,10 @@ function SectionHeader({ number, title, side }: { number: string; title: string;
 }
 
 function Home({ navigate }: { navigate: (page: Page) => void }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   return (
     <main>
-      <section className="hero">
-        <img src={photos.hero} alt={t.home.campaignAlt} />
-        <div className="hero__wash" />
-        <div className="hero__topline"><span>{t.home.city}</span><span>DROP 001 / 2025</span></div>
-        <div className="hero__title">
-          <p>{t.home.presented}</p>
-          <h1>DROP<br /><em>001</em></h1>
-        </div>
-        <Button onClick={() => navigate("shop")} inverse>{t.home.shopDrop}</Button>
-        <p className="hero__caption">{t.home.caption.split("\n").map((line, index) => <span key={line}>{index > 0 && <br />}{line}</span>)}</p>
-      </section>
+      <Drop001Cinematic language={language} onExplore={() => navigate("shop")} />
 
       <section className="products-section">
         <SectionHeader number="01" title={t.home.releases} side={t.home.limited} />
@@ -450,7 +440,9 @@ export default function App() {
   const cartCount = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
   const t = messages[language];
 
-  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [page]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
   useEffect(() => {
     window.localStorage.setItem("kafur-language", language);
     document.documentElement.lang = language;
