@@ -1,5 +1,7 @@
 {
-  "description": "Discover and shop premium oversized streetwear from KAFUR, featuring unique designs and a seamless e-commerce experience tailored for urban fashion enthusiasts.",
+  "title": "KAFUR® — Diseño independiente de indumentaria. Buenos Aires",
+  "description": "KAFUR es un proyecto independiente de arte e indumentaria. Drop 001: remeras oversized con gráfica original, diseñadas en Buenos Aires. Envíos a todo el país.",
+  "language": "es",
   "robots": {
     "index": false
   },

@@ -322,7 +322,7 @@ function ProductDetail({ addToCart }: { addToCart: (size: string) => void }) {
         <div className="sizes">{["S", "M", "L", "XL"].map((item) => <button key={item} className={size === item ? "active" : ""} onClick={() => setSize(item)}>{item}</button>)}</div>
         {guideOpen && <div className="size-guide"><span>{t.product.fit}</span><p>S 54cm / M 57cm / L 60cm / XL 63cm</p></div>}
         <Button onClick={() => addToCart(size)} wide>{t.product.addToBag} — {money(product.price, language)}</Button>
-        <div className="product-notes"><p>{t.product.freeShipping}</p><p>{t.product.installments}</p><p>{t.product.madeIn}</p></div>
+        <div className="product-notes"><p>{t.product.shippingNote}</p><p>{t.product.origin}</p></div>
       </aside>
     </main>
   );
@@ -385,7 +385,7 @@ function CartContents({
         <div><span>{products[0].code}</span><h3>{productName(products[0].id, t)}</h3><p>{productColor(products[0].id, t)} / {t.cart.size} {cart[0].size}</p><div className="quantity"><button onClick={() => updateQuantity(Math.max(0, quantity - 1))} aria-label={t.cart.decrease}>−</button><span>{quantity}</span><button onClick={() => updateQuantity(quantity + 1)} aria-label={t.cart.increase}>+</button></div><button className="remove" onClick={() => updateQuantity(0)}>{t.cart.remove}</button></div>
         <strong>{money(subtotal, language)}</strong>
       </div>
-      <div className="cart-summary"><div><span>{t.cart.subtotal}</span><strong>{money(subtotal, language)}</strong></div><p>{t.cart.shippingCalculated}</p><Button wide>{t.cart.checkout}</Button><small>{t.cart.installmentsAvailable}</small></div>
+      <div className="cart-summary"><div><span>{t.cart.subtotal}</span><strong>{money(subtotal, language)}</strong></div><p>{t.cart.shippingCalculated}</p><Button wide>{t.cart.checkout}</Button></div>
     </div>
   );
 }
@@ -456,7 +456,7 @@ export default function App() {
   useEffect(() => {
     window.localStorage.setItem("kafur-language", language);
     document.documentElement.lang = language;
-    document.title = language === "es" ? "KAFUR — Streetwear de Buenos Aires" : "KAFUR — Buenos Aires Streetwear";
+    document.title = language === "es" ? "KAFUR® — Diseño independiente de indumentaria. Buenos Aires" : "KAFUR® — Independent clothing design. Buenos Aires";
   }, [language]);
   const navigate = (next: Page) => setPage(next);
   const addToCart = (size: string) => {

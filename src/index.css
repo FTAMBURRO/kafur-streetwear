@@ -198,8 +198,9 @@ em { font-family: var(--serif); font-weight: 400; }
 .cart-page__heading h1 { margin: 50px 0 0; font-size: clamp(70px, 12vw, 180px); line-height: .8; letter-spacing: -.08em; }
 .cart-page .cart-content { display: grid; grid-template-columns: 2fr 1fr; gap: 8vw; }
 .cart-page .cart-summary { margin-top: 25px; }
-.newsletter { min-height: 430px; padding: 65px 28px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 10vw; align-items: end; background: var(--paper); border-top: 1px solid var(--line); }
+.newsletter { min-height: 430px; padding: 65px 28px; display: grid; grid-template-columns: 1.25fr .75fr; gap: 10vw; align-items: end; background: var(--paper); border-top: 1px solid var(--line); color: var(--ink); }
 .newsletter span, .newsletter label, .newsletter small { font: 400 8px/1 var(--mono); }
+.newsletter h2 span { font: inherit; letter-spacing: inherit; }
 .newsletter h2 { margin: 55px 0 0; font-size: clamp(52px, 8vw, 120px); line-height: .76; letter-spacing: -.07em; }
 .newsletter form label { display: block; margin-bottom: 12px; }
 .newsletter form > div { display: flex; border-bottom: 1px solid var(--ink); }

@@ -64,7 +64,7 @@ export default function KafurDepthHero({
       aria-label={language === "es" ? "KAFUR — hero principal" : "KAFUR — main hero"}
     >
       <h1 className="kaf-depth__sr">
-        {language === "es" ? "KAFUR — Streetwear de Buenos Aires" : "KAFUR — Buenos Aires streetwear"}
+        {language === "es" ? "KAFUR® — Diseño independiente de indumentaria. Buenos Aires" : "KAFUR® — Independent clothing design. Buenos Aires"}
       </h1>
       <img
         ref={photoRef}
