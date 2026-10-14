@@ -12,19 +12,21 @@
   z-index: 1;
   pointer-events: none;
   opacity: 1;
-  transition: opacity .3s ease;
+  transition: opacity .6s ease;
 }
 
 .drop001__viewport[data-hidden="true"] {
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s ease, visibility 0s linear .3s;
+  transition: opacity .6s ease, visibility 0s linear .6s;
 }
 
 .drop001__viewport[data-hidden="true"] .drop001__cta { pointer-events: none; }
 
 .drop001__canvas-layer { position: absolute; inset: 0; }
 .drop001__canvas-layer canvas { display: block; width: 100%; height: 100%; }
+
+.drop001 { position: relative; overflow: clip; background: var(--ink); }
 
 .drop001__hud {
   position: absolute;
@@ -37,7 +39,8 @@
   letter-spacing: .14em;
   color: rgba(233,229,220,.72);
 }
-.drop001__hud--top { top: 24px; }
+/* Debajo del chrome sticky (preheader 28px + header 74px = 102px). */
+.drop001__hud--top { top: 114px; }
 
 .drop001__copy { position: absolute; inset: 0; z-index: 5; }
 
@@ -51,9 +54,11 @@
   text-shadow: 0 3px 32px rgba(0,0,0,.5);
 }
 
-.drop001__text--top { top: 148px; left: 50%; transform: translateX(-50%); }
+.drop001__text--top { top: 142px; left: 50%; transform: translateX(-50%); }
 .drop001__text--center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
 .drop001__text--bottom { bottom: 13vh; left: 50%; transform: translateX(-50%); }
+/* Capítulo introductorio sin título gigante: solo subtítulo, sin margen superior. */
+.drop001__text--intro .drop001__subtitle { margin: 0; }
 
 .drop001__title {
   margin: 0;
@@ -140,10 +145,11 @@
 }
 
 @media (max-width: 768px) {
-  .drop001__hud { left: 16px; right: 16px; top: 18px; }
+  .drop001__hud { left: 16px; right: 16px; }
+  .drop001__hud--top { top: 100px; }
   .drop001__hud span:last-child { display: none; }
   .drop001__text { width: calc(100vw - 32px); }
-  .drop001__text--top { top: 128px; }
+  .drop001__text--top { top: 122px; }
   .drop001__text--bottom { bottom: 14vh; }
   .drop001__title { font-size: clamp(34px, 10.5vw, 56px); line-height: .96; }
   .drop001__subtitle { font-size: 9px; }

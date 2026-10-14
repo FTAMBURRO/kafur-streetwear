@@ -290,7 +290,9 @@ export default function CylinderCarousel({ language, onExplore, onFallback }: Cy
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: container,
-            start: "top top",
+            // La cámara arranca en cuanto el spacer asoma por abajo: sin
+            // tramo muerto entre el hero y la animación.
+            start: "top bottom",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -371,6 +373,13 @@ export default function CylinderCarousel({ language, onExplore, onFallback }: Cy
             textTimeline
               .fromTo(textEl, { autoAlpha: 1 }, { autoAlpha: 1, duration: 0.8, ease: "none" })
               .to(textEl, { autoAlpha: 0, duration: 0.2, ease: "cinematicSmooth" });
+          } else if (index === textRefs.current.filter(Boolean).length - 1) {
+            // The closing chapter (with CTA) stays visible until the section
+            // ends so there is no dead scroll between the carousel and the
+            // next section.
+            textTimeline
+              .fromTo(textEl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: "cinematicSmooth" })
+              .to(textEl, { autoAlpha: 1, duration: 0.8, ease: "none" });
           } else {
             textTimeline
               .fromTo(textEl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: "cinematicSmooth" })
@@ -414,9 +423,14 @@ export default function CylinderCarousel({ language, onExplore, onFallback }: Cy
         if (disposed) return;
         rafId = requestAnimationFrame(animate);
 
-        // Only paint the cinematic layers while the section owns the viewport.
+        // Only paint the cinematic layers while its own spacer section owns
+        // the viewport. The fixed layer must never cover previous sections:
+        // it blooms exactly when the spacer touches the viewport bottom and
+        // fades slowly, so the photo-to-black handoff reads as a crossfade.
         const rect = container.getBoundingClientRect();
-        const shouldShow = rect.bottom >= window.innerHeight - 1;
+        const entered = rect.top < window.innerHeight;
+        const finished = rect.bottom < window.innerHeight - 1;
+        const shouldShow = entered && !finished;
         if (shouldShow !== layersVisible) {
           layersVisible = shouldShow;
           viewport.dataset.hidden = shouldShow ? "false" : "true";
@@ -557,13 +571,15 @@ export default function CylinderCarousel({ language, onExplore, onFallback }: Cy
         <div className="drop001__copy">
           {chapters.map((chapter, index) => (
             <div
-              className={`drop001__text drop001__text--${chapter.position}`}
+              className={`drop001__text drop001__text--${chapter.position}${index === 0 ? " drop001__text--intro" : ""}`}
               key={`${chapter.title}-${index}`}
               ref={(element) => {
                 textRefs.current[index] = element;
               }}
             >
-              <h2 className="drop001__title">{chapter.title}</h2>
+              {/* El título gigante "KAFUR®" del primer capítulo se elimina;
+                  se conserva solo su subtítulo con la misma tipografía. */}
+              {index !== 0 && <h2 className="drop001__title">{chapter.title}</h2>}
               {chapter.description && <p className="drop001__subtitle">{chapter.description}</p>}
               {index === chapters.length - 1 && (
                 <button className="drop001__cta" type="button" onClick={onExplore}>
@@ -581,7 +597,7 @@ export default function CylinderCarousel({ language, onExplore, onFallback }: Cy
         </div>
       </div>
 
-      <div className="drop001__spacer" ref={containerRef} style={{ height: "500svh" }} />
+      <div className="drop001__spacer" ref={containerRef} style={{ height: "350svh" }} />
 
       {showLoader && (
         <div className={`drop001-loader ${isLoading ? "" : "is-done"}`} aria-hidden="true">

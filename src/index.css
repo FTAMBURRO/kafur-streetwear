@@ -23,6 +23,7 @@ button { color: inherit; }
 button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 img { display: block; width: 100%; }
 .app { min-height: 100vh; overflow: hidden; }
+.site-chrome { position: sticky; top: 0; z-index: 50; }
 .announcement { height: 28px; background: var(--paper); color: var(--ink); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--line); font: 500 9px/1 var(--mono); letter-spacing: .08em; }
 .header { height: 74px; position: relative; z-index: 30; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 28px; background: var(--ink); color: var(--paper); border-bottom: 1px solid var(--ink-soft); }
 .logo-button, .nav button, .bag-link, .menu-toggle { border: 0; background: none; padding: 0; cursor: pointer; }
@@ -59,6 +60,11 @@ em { font-family: var(--serif); font-weight: 400; }
 .button--inverse { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 .button--inverse:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
 .button--wide { width: 100%; }
+/* Espacio estructural reservado para el futuro HERO KAFUR DINÁMICO.
+   Mínimo y neutro: no simula el hero definitivo. */
+.future-hero { min-height: 24svh; padding: 48px 28px 40px; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.future-hero span { font: 400 9px/1 var(--mono); letter-spacing: .08em; color: var(--grey); }
+.future-hero p { margin: 0; font-size: clamp(28px, 4vw, 56px); line-height: 1; letter-spacing: -.05em; font-weight: 600; color: var(--line); }
 .products-section { padding: 88px 28px 120px; }
 .section-header { border-top: 1px solid var(--ink); padding: 14px 0 36px; display: grid; grid-template-columns: 1fr 4fr 1fr; align-items: start; }
 .section-header span { font: 400 9px/1.3 var(--mono); }
@@ -122,7 +128,7 @@ em { font-family: var(--serif); font-weight: 400; }
 .product-gallery__primary { grid-column: span 2; aspect-ratio: 1.1 !important; }
 .product-gallery img { height: 100%; object-fit: cover; filter: saturate(.8); }
 .product-gallery figure span { position: absolute; bottom: 12px; left: 12px; padding: 6px 8px; background: var(--paper); font: 400 8px/1 var(--mono); }
-.product-info { position: sticky; top: 0; padding: 70px 5vw; min-height: 760px; }
+.product-info { position: sticky; top: 102px; padding: 70px 5vw; min-height: 760px; }
 .product-info > span { font: 400 9px/1 var(--mono); color: var(--grey); }
 .product-info h1 { margin: 20px 0 8px; font-size: clamp(42px, 5vw, 78px); line-height: .9; letter-spacing: -.07em; }
 .product-info__price { font: 400 12px/1 var(--mono); }
@@ -225,6 +231,7 @@ footer { background: var(--ink); color: var(--paper); }
   .hero h1 { font-size: 28vw; line-height: .66; }
   .hero .button { left: 16px; right: 16px; bottom: 24px; width: calc(100% - 32px); }
   .hero__caption { right: 16px; bottom: 96px; }
+  .future-hero { padding: 36px 16px 32px; }
   .products-section { padding: 60px 16px 80px; }
   .section-header { grid-template-columns: 36px 1fr; padding-bottom: 24px; }
   .section-header span:last-child { display: none; }

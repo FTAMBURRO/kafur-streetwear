@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { LanguageContext, messages, useLanguage, type Language } from "./i18n";
 import Drop001Cinematic from "./components/drop001/Drop001Cinematic";
+import KafurDepthHero from "./components/hero/KafurDepthHero";
+import LogoInterlude from "./components/hero/LogoInterlude";
 
 type Page = "home" | "shop" | "product" | "collections" | "about" | "cart";
 type CartItem = { id: number; size: string; quantity: number };
@@ -204,6 +206,14 @@ function Home({ navigate }: { navigate: (page: Page) => void }) {
   const { language, t } = useLanguage();
   return (
     <main>
+      {/* 1 — HERO KAFUR: imagen definitiva intacta, fijada con recorrido.
+          El carrusel DROP 001 queda segundo. */}
+      <div className="hero-pin">
+        <KafurDepthHero language={language} onExplore={() => navigate("shop")} />
+      </div>
+      {/* Momento de oscuridad: el logo clavado, entre la foto y el carrusel. */}
+      <LogoInterlude />
+
       <Drop001Cinematic language={language} onExplore={() => navigate("shop")} />
 
       <section className="products-section">
@@ -458,8 +468,10 @@ export default function App() {
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
       <div className="app">
-        <div className="announcement"><span>{t.announcement.shipping}</span><span>{t.announcement.drop}</span><span>{t.announcement.location}</span></div>
-        <Header page={page} cartCount={cartCount} navigate={navigate} openCart={() => setCartOpen(true)} />
+        <div className="site-chrome">
+          <div className="announcement"><span>{t.announcement.shipping}</span><span>{t.announcement.drop}</span><span>{t.announcement.location}</span></div>
+          <Header page={page} cartCount={cartCount} navigate={navigate} openCart={() => setCartOpen(true)} />
+        </div>
         {page === "home" && <Home navigate={navigate} />}
         {page === "shop" && <Shop navigate={navigate} />}
         {page === "product" && <ProductDetail addToCart={addToCart} />}

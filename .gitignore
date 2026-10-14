@@ -1,6 +1,8 @@
 node_modules/
 dist/
 build/
+# Modelo ML local (66MB, se descarga solo con tools/depth/make_depth.py)
+tools/depth/*.onnx
 .cache/
 .env*
 .vite/

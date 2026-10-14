@@ -15,7 +15,8 @@ export default function Drop001Fallback({
           <div className="drop-fallback__shade" />
           <div className="drop-fallback__copy">
             <span>{look.eyebrow[language]}</span>
-            <h1>{look.title[language]}</h1>
+            {/* Sin título gigante en el look introductorio: solo subtítulo. */}
+            {look.id !== "look-black" && <h1>{look.title[language]}</h1>}
             <p>{look.description[language]}</p>
           </div>
         </article>
